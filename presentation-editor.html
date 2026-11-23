@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src https://api.github.com; base-uri 'none'; form-action 'none'; object-src 'none'">
+<title>Edit presentation | From Pressure to Flow</title>
+<link rel="stylesheet" href="presentation-editor.css">
+<script type="module" src="presentation-editor.js"></script>
+</head>
+<body>
+<main>
+<a href="./#presentation">Back to the presentation</a>
+<h1>Edit presentation</h1>
+<p>Publish the YouTube link and verbatim transcript from this page. You can update either field or both together.</p>
+<p id="repository">Checking the site address…</p>
+<noscript><p>Turn on JavaScript to use the presentation editor.</p></noscript>
+<form id="editor" autocomplete="off">
+<fieldset id="editor-fields" disabled>
+<label for="youtube-url">YouTube video link</label>
+<input id="youtube-url" type="url" inputmode="url" placeholder="https://www.youtube.com/watch?v=…" aria-describedby="video-help">
+<p class="hint" id="video-help">Use a public or unlisted video that your instructor can open. Leave it blank to keep the link pending.</p>
+
+<label for="transcript-file">Upload a transcript file</label>
+<input id="transcript-file" type="file" accept=".txt,.vtt,.srt,text/plain,text/vtt,application/x-subrip" aria-describedby="transcript-help">
+<label for="transcript-text">Or paste the verbatim transcript</label>
+<textarea id="transcript-text" rows="12" maxlength="100000" spellcheck="false" aria-describedby="transcript-help"></textarea>
+<p class="hint" id="transcript-help">Use the YouTube auto-generated track. The page preserves the words, line breaks, and any timestamps you include. A text upload replaces the draft above. Leave this field blank to keep the transcript pending.</p>
+
+<details>
+<summary>Preview the draft</summary>
+<p id="preview-link"></p>
+<pre id="preview-text"></pre>
+</details>
+
+<label for="publish-token">GitHub publishing token</label>
+<input id="publish-token" type="password" autocomplete="off" spellcheck="false" aria-describedby="token-help">
+<p class="hint" id="token-help">Paste a fine-grained GitHub token limited to this repository with Contents: Read and write. The editor sends it to GitHub when you publish and clears it after the attempt.</p>
+
+<label class="confirm" id="confirm-replacement" hidden><input type="checkbox" id="confirm-check"> I’ve reviewed the changes, including any removed content or transcript kept with a new video.</label>
+<div class="actions">
+<button type="submit" id="publish">Publish to GitHub Pages</button>
+<button type="button" class="secondary" id="reload-presentation">Reload published content</button>
+</div>
+</fieldset>
+</form>
+<p id="editor-status" role="status" aria-live="polite"></p>
+<p id="editor-error" role="alert" hidden></p>
+<a id="view-commit" hidden target="_blank" rel="noopener">Review the commit on GitHub</a>
+</main>
+</body>
+</html>
